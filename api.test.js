@@ -26,4 +26,16 @@ describe('Book API', () => {
                 done();
             });
     })
+
+    it('should GET all books', (done) => {
+        chai.request(server)
+            .get('/books')
+            .end((err,res) => {
+                expect(res).to.have.status(200);
+                expect(res.body).to.be.a('array');
+                done();
+            });
+    });
+
+    
 });
