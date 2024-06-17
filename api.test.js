@@ -38,7 +38,7 @@ describe('Book API', () => {
     });
 
     it('shoud get a single book', (done) => {
-        const bookId = 1;
+        //const bookId = 1;
         chai.request(server)
             .get(`/books/${bookId}`)
             .end((err,res) => {
@@ -52,7 +52,7 @@ describe('Book API', () => {
     });
 
     it('should PUT an existing book', done => {
-        const bookId = 1;
+        //const bookId = 1;
         const updatedBook = {
             id: bookId,
             title: "Updated Title",
@@ -66,6 +66,16 @@ describe('Book API', () => {
                 expect(res.body).to.be.a('object');
                 expect(res.body.title).to.equal(updatedBook.title);
                 expect(res.body.author).to.equal(updatedBook.author);
+                done();
+            });
+    });
+
+    it('should DELETE an existing book', done => {
+        //const bookId = 1;
+        chai.request(server)
+            .delete(`/books/${bookId}`)
+            .end((err, res) => {
+                expect(res).to.have.status(204);
                 done();
             });
     });
