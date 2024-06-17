@@ -79,4 +79,30 @@ describe('Book API', () => {
                 done();
             });
     });
+
+    it('should return 404 when trying to GET, PUT or DELETE non-existing book', (done) => {
+        let nonExistingBookId = "9999";
+        const nonExistingBook = {
+            id: nonExistingBookId,
+            title: "Test Title",
+            author: "Test Author"
+        };
+
+        chai.request(server)
+        .get(`/books/${nonExistingBookId}`)
+        .end((err,res) => {
+            expect(res).to.have.status(404);
+        });
+        chai.request(server)
+        .put(`/books/${nonExistingBookId}`)
+        .end((err, res) => {
+            expect(res).to.have.status(404);
+        });
+        chai.request(server)
+        .delete(`/books/${nonExistingBookId}`)
+        .end((err, res) => {
+            expect(res).to.have.status(404);
+            done();
+        });
+    });
 });
